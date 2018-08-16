@@ -3,15 +3,17 @@
 # # cklinger@novareto.de
 
 
+import re
+import spacy
+import textacy
+
 from uvc.api import api
-import spacy 
 from zope.interface import Interface
 from gensim.summarization.summarizer import summarize
 from plone.app.contenttypes.interfaces import IDocument
 from plone.app.layout.viewlets.interfaces import IBelowContent
 
 
-import re
 
 def cleanhtml(raw_html):
   cleanr = re.compile('<.*?>')
@@ -20,7 +22,7 @@ def cleanhtml(raw_html):
 
 
 class SummaryViewlet(api.Viewlet):
-    api.context(Interface)
+    api.context(IDocument)
     api.viewletmanager(IBelowContent)
 
     def render(self):
